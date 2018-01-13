@@ -1,0 +1,13 @@
+{
+    "database": {
+        "connectionString": "mongodb://localhost:27017/ranged-pagination-demo-dev"
+    },
+    "server": {
+        "port": 5000,
+        "routePrefix": "/api",
+        "plugins": [
+            "logger",
+            "swagger"
+        ]
+    }
+}

@@ -1,0 +1,3 @@
+export class BaseDao {
+  constructor() { }
+}

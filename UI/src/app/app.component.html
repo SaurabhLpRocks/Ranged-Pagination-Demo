@@ -1,0 +1,41 @@
+<div [ngBusy]="{busy: busy, message: 'Loading data, this may take few minutes!'}"></div>
+<div style="width:50%">
+  <form [formGroup]="taskForm" (ngSubmit)="addTask(taskForm.value)">
+    <div class="width:100%;float:left; clear:both;">
+      <div style="width:20%;float:left">
+        <input type="text" [formControl]="index" class="form-control" placeholder="index" />
+      </div>
+      <div style="width:20%;float:left">
+        <input type="text" [formControl]="name" class="form-control" placeholder="name" />
+      </div>
+      <div style="width:20%;float:left">
+        <input type="text" [formControl]="userId" class="form-control" placeholder="userId" />
+      </div>
+      <div style="width:20%;float:left">
+        <input type="text" [formControl]="mobile" class="form-control" placeholder="mobile" />
+      </div>
+      <div style="width:20%;float:left">
+        <input type="date" [formControl]="taskDate" class="form-control" placeholder="taskDate" />
+      </div>
+    </div>
+    <div class="width:100%;float:left; clear:both;">
+      <button type="submit" class="btn btn-success">Add Task</button>{{taskPostCount}}
+    </div>
+  </form>
+  <code *ngIf="addTaskResponse">{{addTaskResponse | json}}</code>
+</div>
+
+
+<div style="text-align:center">
+  <p-dataTable [dataKey]="'_id'" *ngIf="isTableVisible()" [value]="table" expandableRows="true" (onFilter)="onColumnFilterChanged($event)"
+    (onSort)="onTableColumnSortChanged($event)" [lazy]="true">
+    <p-column field="index" header="Index" [filter]="true" [sortable]="true"></p-column>
+    <p-column field="name" header="Task Name" [filter]="true" [sortable]="true"></p-column>
+    <p-column field="mobile" header="Mobile" [filter]="true" [sortable]="true"></p-column>
+    <p-column field="taskDate" header="Task Date"></p-column>
+    <p-column field="createdAt" header="Date Created"></p-column>
+    <p-column field="updatedAt" header="Date Updated"></p-column>
+  </p-dataTable>
+  <p-paginator [rowsPerPageOptions]="[10,20,30,50,100,200,300,400,500,1000]" [first]="tableSearchConfig.firstRowIndex" [totalRecords]="tableSearchConfig.totalRecords"
+    *ngIf="isTableVisible()" [rows]="tableSearchConfig.rowsPerPage" (onPageChange)="onPageChanged($event)"></p-paginator>
+</div>
